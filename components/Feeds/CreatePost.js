@@ -1,15 +1,18 @@
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { createNewPostAction } from "../../store/Actions/postActions";
+import userIcon from "../../public/assets/user_icon.png";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
 
-  const { data: session } = useSession();
+  const { user } = useSelector((state) => state.user);
+  const userAvatar = user.image ? user.image : userIcon;
+
   const postTextInputRef = useRef(null);
   const postFileInputRef = useRef(null);
   const [imageToPost, setImageToPost] = useState(null);
@@ -52,20 +55,20 @@ const CreatePost = () => {
   return (
     <div className="bg-white rounded-md shadow-md text-gray-500 p-2">
       <div className="flex p-4 space-x-2 items-center">
-        <Image
-          src={session?.user.image}
-          alt="avatar"
-          height="40"
-          width="40"
-          className="rounded-full cursor-pointer"
-        />
+        {userAvatar && (
+          <Image
+            src={userAvatar}
+            alt="avatar"
+            height="40"
+            width="40"
+            className="rounded-full cursor-pointer"
+          />
+        )}
         <form className="flex flex-1">
           <input
             type="text"
             ref={postTextInputRef}
-            placeholder={`What's on you mind, ${
-              session?.user.name.split(" ")[0]
-            }`}
+            placeholder={`What's on you mind, ${user.firstName}`}
             className="rounded-full h-12 flex-grow focus:outline-none font-medium bg-gray-100 px-4"
           />
           <button hidden onClick={formSubmitHandler}></button>

@@ -5,10 +5,15 @@ import { FiTrendingUp } from "react-icons/fi";
 import { FaRegHandshake } from "react-icons/fa";
 import { AiFillBell, AiFillMessage } from "react-icons/ai";
 import { RiLogoutCircleLine } from "react-icons/ri";
-import { signOut, useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+import userIcon from "../public/assets/user_icon.png";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { user } = useSelector((state) => state.user);
+  const userAvatar = user.image ? user.image : userIcon;
+  const logoutHandler = () => {
+    console.log("logout");
+  };
 
   return (
     <div className="bg-white flex items-center p-2 shadow-md top-0 sticky z-50 h-16">
@@ -51,16 +56,18 @@ const Header = () => {
 
       {/* Right  */}
       <div className="flex items-center justify-end min-w-fit space-x-2">
-        <Image
-          src={session?.user.image}
-          alt="avatar"
-          height="50"
-          width="50"
-          className="rounded-full cursor-pointer"
-        />
+        {userAvatar && (
+          <Image
+            src={userAvatar}
+            alt="avatar"
+            height="50"
+            width="50"
+            className="rounded-full cursor-pointer"
+          />
+        )}
 
         <p className="hidden xl:inline-flex font-semibold text-sm whitespace-nowrap p-3 max-w-xs">
-          {session?.user.name.split(" ")[0]}
+          {user.firstName}
         </p>
 
         <AiFillMessage
@@ -76,7 +83,7 @@ const Header = () => {
         />
         <RiLogoutCircleLine
           size={20}
-          onClick={signOut}
+          onClick={logoutHandler}
           className="hidden lg:inline-flex h-10 w-10 bg-gray-200 text-gray-600 rounded-full
                      p-2 cursor-pointer hover:bg-gray-300"
         />
