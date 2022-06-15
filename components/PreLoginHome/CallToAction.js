@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import LoginModal from "./Modal/LoginModal";
 
 const CallToAction = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <section style={{ backgroundColor: "#667eea" }}>
@@ -11,10 +13,14 @@ const CallToAction = () => {
           <h3 className="my-4 text-2xl text-white">
             Get yourself engage with the Smart Project Sharing Platform!
           </h3>
-          <button className="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider">
+          <button
+            className="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider"
+            onClick={() => setShowModal(true)}
+          >
             Login
           </button>
         </div>
+        {showModal && <LoginModal setShowModal={setShowModal} />}
       </section>
     </>
   );

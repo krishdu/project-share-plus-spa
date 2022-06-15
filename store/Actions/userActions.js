@@ -9,7 +9,8 @@ import { setAccessToken, getAccessToken } from "../../utils/local-storage.js";
  */
 export const loginUser = (userEmail, password) => async (dispatch) => {
   try {
-    //need to add loading dispatch
+    dispatch(userActions.loadUserRequest());
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -20,11 +21,39 @@ export const loginUser = (userEmail, password) => async (dispatch) => {
       { userEmail, password },
       config
     );
-    console.log(data);
+
     setAccessToken(data.jwtToken);
     dispatch(userActions.loadUserSuccess(data.user));
   } catch (error) {
-    // need to add dispatch for error
-    console.log(error);
+    dispatch(userActions.loadUserFail(error.response.data.message));
+  }
+};
+
+/**
+ * @description If jwt present then login
+ */
+export const loadUser = () => async (dispatch) => {
+  try {
+    dispatch(userActions.loadUserRequest());
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const accessToken = getAccessToken();
+
+    if (accessToken) {
+      config.headers.Authorization = "Bearer " + accessToken;
+    }
+
+    const { data } = await axios.get(
+      `${process.env.BACKEND_URL}/api/v1/user/me`,
+      config
+    );
+    dispatch(userActions.loadUserSuccess(data));
+  } catch (error) {
+    dispatch(userActions.loadUserFail(error.response.data.message));
   }
 };

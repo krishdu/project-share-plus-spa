@@ -5,12 +5,21 @@ const userSlice = createSlice({
   initialState: {
     user: {},
     isAutheticated: false,
+    loading: false,
     error: null,
   },
   reducers: {
+    loadUserRequest: (state, action) => {
+      state.loading = true;
+    },
     loadUserSuccess: (state, action) => {
       state.user = action.payload;
       state.isAutheticated = true;
+      state.loading = false;
+    },
+    loadUserFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });

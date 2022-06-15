@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import LoginModal from "./Modal/LoginModal";
 
 const Jumbotron = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <div
@@ -17,10 +20,14 @@ const Jumbotron = () => {
             Showcase your best to the WORLD.
           </h3>
 
-          <button className="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+          <button
+            className="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider"
+            onClick={() => setShowModal(true)}
+          >
             Login Now
           </button>
         </div>
+        {showModal && <LoginModal setShowModal={setShowModal} />}
       </div>
     </>
   );

@@ -1,19 +1,27 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../store/Actions/userActions";
+import Loader from "../../Loader/Loader";
 
 const LoginModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
+  const { loading } = useSelector((state) => state.user);
 
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(loginUser(email, password));
   };
 
+  const btnText = loading ? "Please wait.." : "Sign in";
+  // useEffect(() => {
+
+  // }, [])
+
   return (
     <>
+      {loading && <Loader />}
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative w-auto my-6 mx-auto max-w-3xl">
           {/*content*/}
@@ -78,7 +86,7 @@ const LoginModal = ({ setShowModal }) => {
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                       >
-                        Sign in
+                        {btnText}
                       </button>
                     </form>
                   </div>
