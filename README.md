@@ -23,7 +23,13 @@ Phase - 1: Initials & Build route for User
     + set JWT token in cookie using REST API call to Spring Boot backend
     + maintain state in frontend using `@reduxjs/toolkit`
 + Build UI component for Home page and login
++ Added user Register component
 
+```
+Phase - 2: Upload/Create Post (Projects)
+```
++ added Create Post Component
++ added Feeds Component
 
 ## Getting Started
 

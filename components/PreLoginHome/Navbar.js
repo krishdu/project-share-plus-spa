@@ -2,11 +2,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import LoginModal from "./Modal/LoginModal";
+import RegisterModal from "./Modal/RegisterModal";
 
 const Navbar = () => {
   const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   return (
     <>
@@ -49,10 +51,25 @@ const Navbar = () => {
                   Login
                 </a>
               </li>
+              <li
+                className={
+                  router.pathname == "/register" ? "font-bold text-red" : ""
+                }
+              >
+                <a
+                  className="px-4 hover:text-blue-800 cursor-pointer"
+                  onClick={() => setShowRegisterModal(true)}
+                >
+                  Register
+                </a>
+              </li>
             </ul>
           </div>
 
           {showModal && <LoginModal setShowModal={setShowModal} />}
+          {showRegisterModal && (
+            <RegisterModal setShowModal={setShowRegisterModal} />
+          )}
         </div>
       </nav>
     </>

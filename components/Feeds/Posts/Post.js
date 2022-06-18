@@ -8,13 +8,12 @@ const Post = () => {
   const posts = useSelector((state) => state.post.posts);
 
   useEffect(() => {
-    console.log("ran inside useeffect...");
     dispatch(getAllPostAction());
   }, []);
   return (
     <div>
       {posts.map((post) => (
-        <PostCard post={post} key={post.id} />
+        <PostCard post={post} key={post.postId} />
       ))}
     </div>
   );

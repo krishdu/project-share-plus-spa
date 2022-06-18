@@ -3,25 +3,28 @@ import React from "react";
 import { FiThumbsUp } from "react-icons/fi";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
+import userIcon from "../../../public/assets/user_icon.png";
 
 const PostCard = ({ post }) => {
+  const userAvatar = post.avatar ? post.avatar : userIcon;
+
   return (
-    <div className="flex flex-col" key={post.id}>
+    <div className="flex flex-col" key={post.postId}>
       <div className="bg-white mt-6 rounded-md p-4">
         <div className="flex items-center space-x-2">
           <img
-            src={post.profilePic}
+            src={userAvatar}
             height={40}
             width={40}
             className="rounded-full"
           />
           <div>
-            <p className="font-medium"> {post.name} </p>
-            <p className="text-xs text-gray-500">{post.timeStamp}</p>
+            <p className="font-medium"> {post.owner} </p>
+            <p className="text-xs text-gray-500">{post.createDate}</p>
           </div>
         </div>
         {/* If Any Image/Video */}
-        <p className="py-4">{post.post}</p>
+        <p className="py-4">{post.description}</p>
         {post.image != null && (
           <div className="relative h-60 md:h-60 bg-white">
             <Image src={post.image} layout="fill" objectFit="cover" />

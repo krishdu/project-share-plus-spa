@@ -1,17 +1,21 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoMdPhotos } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { createNewPostAction } from "../../store/Actions/postActions";
+import { postActions } from "../../store/Slices/feeds/postSlice";
 import userIcon from "../../public/assets/user_icon.png";
 import { useSelector } from "react-redux";
+import Loader from "../Loader/Loader";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
-  const userAvatar = user.image ? user.image : userIcon;
+  const { loading, error, success } = useSelector((state) => state.post);
+
+  const userAvatar = user.avatar ? user.avatar : userIcon;
 
   const postTextInputRef = useRef(null);
   const postFileInputRef = useRef(null);
@@ -42,18 +46,27 @@ const CreatePost = () => {
 
     const formData = new FormData();
     formData.append("file", imageToPost);
-    formData.append("post", postTextInputRef.current.value);
-    formData.append("name", session?.user.name);
-    formData.append("email", session?.user.email);
-    formData.append("profilePic", session?.user.image);
+    formData.append("description", postTextInputRef.current.value);
 
     //call api
     dispatch(createNewPostAction(formData));
     console.log("successfully submitted");
   };
 
+  useEffect(() => {
+    if (error) {
+      //show alert
+      dispatch(postActions.clearErrors());
+    }
+
+    if (success) {
+      dispatch(postActions.resetAddPost());
+    }
+  }, [error, success]);
+
   return (
     <div className="bg-white rounded-md shadow-md text-gray-500 p-2">
+      {loading && <Loader />}
       <div className="flex p-4 space-x-2 items-center">
         {userAvatar && (
           <Image

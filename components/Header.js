@@ -10,7 +10,7 @@ import userIcon from "../public/assets/user_icon.png";
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);
-  const userAvatar = user.image ? user.image : userIcon;
+  const userAvatar = user.avatar ? user.avatar : userIcon;
   const logoutHandler = () => {
     console.log("logout");
   };

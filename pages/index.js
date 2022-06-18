@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Project Share</title>
+        <title>Project Share+</title>
         <meta
           name="description"
           content="Project share+, more than just project"

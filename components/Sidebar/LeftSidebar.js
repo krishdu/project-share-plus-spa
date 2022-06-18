@@ -7,7 +7,7 @@ import userIcon from "../../public/assets/user_icon.png";
 
 const LeftSidebar = () => {
   const { user } = useSelector((state) => state.user);
-  const userAvatar = user.image ? user.image : userIcon;
+  const userAvatar = user.avatar ? user.avatar : userIcon;
 
   return (
     <div className="hidden lg:inline-flex flex-col py-2 pl-2 max-w-xl lg:min-w-[320px]">

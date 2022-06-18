@@ -1,5 +1,5 @@
 import axios from "axios";
-import { postActions } from "../Slices/postSlice";
+import { postActions } from "../Slices/feeds/postSlice";
 import { setAccessToken, getAccessToken } from "../../utils/local-storage.js";
 
 /**
@@ -8,15 +8,18 @@ import { setAccessToken, getAccessToken } from "../../utils/local-storage.js";
  */
 export const createNewPostAction = (postDetails) => async (dispatch) => {
   try {
-    //need to add loading dispatch
-    const headers = new Headers({
-      "Content-Type": "application/json",
-    });
+    dispatch(postActions.addGetPostRequest());
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
 
     const accessToken = getAccessToken();
 
     if (accessToken) {
-      headers.append("Authorization", "Bearer " + accessToken);
+      config.headers.Authorization = "Bearer " + accessToken;
     }
 
     const { data } = await axios.post(
@@ -24,11 +27,11 @@ export const createNewPostAction = (postDetails) => async (dispatch) => {
       postDetails,
       config
     );
-
-    dispatch(postActions.addPost(data));
+    dispatch(postActions.addPostSuccess(data));
   } catch (error) {
-    // need to add dispatch for error
-    console.log(error);
+    const errorResponse =
+      error?.response?.data?.message || "Something went wrong!";
+    dispatch(postActions.addGetPostFail(errorResponse));
   }
 };
 
@@ -37,7 +40,8 @@ export const createNewPostAction = (postDetails) => async (dispatch) => {
  */
 export const getAllPostAction = () => async (dispatch) => {
   try {
-    //need to add loading dispatch
+    dispatch(postActions.addGetPostRequest());
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -54,10 +58,11 @@ export const getAllPostAction = () => async (dispatch) => {
       `${process.env.BACKEND_URL}/api/v1/post`,
       config
     );
-
     dispatch(postActions.getAllPost(data));
   } catch (error) {
     // need to add dispatch for error
-    console.log(error);
+    const errorResponse =
+      error?.response?.data?.message || "Something went wrong!";
+    dispatch(postActions.addGetPostFail(errorResponse));
   }
 };
