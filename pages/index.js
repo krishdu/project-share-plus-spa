@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../store/Actions/userActions";
 import Loader from "../components/Loader/Loader";
 
+import Alert from "../utils/Alert/Alert";
+
 export default function Home() {
   const dispatch = useDispatch();
   const { isAutheticated, loading } = useSelector((state) => state.user);
@@ -20,6 +22,10 @@ export default function Home() {
   // if (loading) {
   //   return <Loader />;
   // }
+  const options = {
+    autoClose: false,
+    keepAfterRouteChange: false,
+  };
 
   return (
     <div>
@@ -33,7 +39,7 @@ export default function Home() {
       </Head>
 
       {loading && <Loader />}
-
+      <Alert />
       {isAutheticated && (
         <Fragment>
           <Header />

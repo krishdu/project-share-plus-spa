@@ -20,7 +20,9 @@ const PostCard = ({ post }) => {
           />
           <div>
             <p className="font-medium"> {post.owner} </p>
-            <p className="text-xs text-gray-500">{post.createDate}</p>
+            <p className="text-xs text-gray-500">
+              {new Date(post?.createDate)?.toLocaleString()}
+            </p>
           </div>
         </div>
         {/* If Any Image/Video */}

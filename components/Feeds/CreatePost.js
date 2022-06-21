@@ -60,6 +60,10 @@ const CreatePost = () => {
     }
 
     if (success) {
+      postFileInputRef.current.value = null;
+      postTextInputRef.current.value = null;
+      setImageToPost(null);
+
       dispatch(postActions.resetAddPost());
     }
   }, [error, success]);
