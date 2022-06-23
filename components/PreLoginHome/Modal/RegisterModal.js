@@ -4,6 +4,7 @@ import { BiUserCircle } from "react-icons/bi";
 import { registerUser } from "../../../store/Actions/userActions";
 import { registerUserActions } from "../../../store/Slices/user/registerUserSlice";
 import Loader from "../../Loader/Loader";
+import { alertService } from "../../../utils/Alert/alert.service";
 
 const RegisterModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
@@ -24,14 +25,20 @@ const RegisterModal = ({ setShowModal }) => {
 
   useEffect(() => {
     if (error) {
-      //show alert
+      alertService.error(error, {
+        autoClose: true,
+        keepAfterRouteChange: false,
+      });
       dispatch(registerUserActions.clearErrors());
     }
 
     if (success) {
       dispatch(registerUserActions.resetRegisterUser());
       setShowModal(false);
-      //show success alert
+      alertService.success("Successfully Registered!", {
+        autoClose: true,
+        keepAfterRouteChange: false,
+      });
     }
   }, [error, success]);
 

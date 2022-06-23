@@ -8,6 +8,7 @@ import { postActions } from "../../store/Slices/feeds/postSlice";
 import userIcon from "../../public/assets/user_icon.png";
 import { useSelector } from "react-redux";
 import Loader from "../Loader/Loader";
+import { alertService } from "../../utils/Alert/alert.service";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -48,14 +49,15 @@ const CreatePost = () => {
     formData.append("file", imageToPost);
     formData.append("description", postTextInputRef.current.value);
 
-    //call api
     dispatch(createNewPostAction(formData));
-    console.log("successfully submitted");
   };
 
   useEffect(() => {
     if (error) {
-      //show alert
+      alertService.error(error, {
+        autoClose: true,
+        keepAfterRouteChange: false,
+      });
       dispatch(postActions.clearErrors());
     }
 
@@ -63,8 +65,11 @@ const CreatePost = () => {
       postFileInputRef.current.value = null;
       postTextInputRef.current.value = null;
       setImageToPost(null);
-
       dispatch(postActions.resetAddPost());
+      alertService.success("Successfully posted!", {
+        autoClose: true,
+        keepAfterRouteChange: false,
+      });
     }
   }, [error, success]);
 
@@ -85,7 +90,7 @@ const CreatePost = () => {
           <input
             type="text"
             ref={postTextInputRef}
-            placeholder={`What's on you mind, ${user.firstName}`}
+            placeholder={`What's on your mind, ${user.firstName}`}
             className="rounded-full h-12 flex-grow focus:outline-none font-medium bg-gray-100 px-4"
           />
           <button hidden onClick={formSubmitHandler}></button>

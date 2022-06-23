@@ -24,6 +24,7 @@ Phase - 1: Initials & Build route for User
     + maintain state in frontend using `@reduxjs/toolkit`
 + Build UI component for Home page and login
 + Added user Register component
++ Added User Profile section
 
 ```
 Phase - 2: Upload/Create Post (Projects)

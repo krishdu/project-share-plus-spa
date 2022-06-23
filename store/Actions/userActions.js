@@ -1,6 +1,10 @@
 import axios from "axios";
 import { userActions } from "../Slices/user/userSlice";
-import { setAccessToken, getAccessToken } from "../../utils/local-storage.js";
+import {
+  setAccessToken,
+  getAccessToken,
+  removeAccessToken,
+} from "../../utils/local-storage.js";
 import { registerUserActions } from "../Slices/user/registerUserSlice";
 
 /**
@@ -57,7 +61,6 @@ export const loadUser = () => async (dispatch) => {
     );
     dispatch(userActions.loadUserSuccess(data));
   } catch (error) {
-    //console.log(error);
     const errorResponse =
       error?.response?.data?.message || "Something went wrong!";
     dispatch(userActions.loadUserFail(errorResponse));
@@ -82,7 +85,7 @@ export const registerUser = (userDetails) => async (dispatch) => {
       userDetails,
       config
     );
-    console.log(data);
+
     dispatch(
       registerUserActions.registerUserSuccess({ user: data, success: true })
     );
@@ -91,5 +94,20 @@ export const registerUser = (userDetails) => async (dispatch) => {
     const errorResponse =
       error?.response?.data?.message || "Something went wrong!";
     dispatch(registerUserActions.registerUserFail(errorResponse));
+  }
+};
+
+/**
+ * @description reducer action to logout user
+ * @param  {} userEmail
+ * @param  {} password
+ */
+export const logoutUser = () => async (dispatch) => {
+  try {
+    dispatch(userActions.logoutUserRequest());
+    removeAccessToken();
+    dispatch(userActions.logoutUserSuccess());
+  } catch (error) {
+    dispatch(userActions.logoutUserFail(error));
   }
 };

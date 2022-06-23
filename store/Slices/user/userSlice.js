@@ -21,6 +21,20 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    logoutUserRequest: (state) => {
+      state.loading = true;
+    },
+    logoutUserSuccess: (state) => {
+      state.user = {};
+      state.isAutheticated = false;
+      state.loading = false;
+    },
+    logoutUserFail: (state, action) => {
+      state.error = action.payload;
+    },
+    clearErrors: (state, action) => {
+      state.error = null;
+    },
   },
 });
 

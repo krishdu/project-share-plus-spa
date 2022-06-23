@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Header from "../components/Header";
 import LeftSidebar from "../components/Sidebar/LeftSidebar";
 import RightSidebar from "../components/Sidebar/RightSidebar.js";
@@ -7,36 +6,31 @@ import Feed from "../components/Feeds/Feed";
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../store/Actions/userActions";
+import { userActions } from "../store/Slices/user/userSlice";
 import Loader from "../components/Loader/Loader";
 
 import Alert from "../utils/Alert/Alert";
+import TabHeader from "../components/TabHeader";
+
+let loadUserAttempt = 2;
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { isAutheticated, loading } = useSelector((state) => state.user);
+  const { isAutheticated, loading, error } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(loadUser());
-  }, []);
-
-  // if (loading) {
-  //   return <Loader />;
-  // }
-  const options = {
-    autoClose: false,
-    keepAfterRouteChange: false,
-  };
+    if (loadUserAttempt > 0) {
+      dispatch(loadUser());
+      loadUserAttempt--;
+    }
+    if (error) {
+      dispatch(userActions.clearErrors());
+    }
+  }, [error]);
 
   return (
     <div>
-      <Head>
-        <title>Project Share+</title>
-        <meta
-          name="description"
-          content="Project share+, more than just project"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <TabHeader title="Project Share+" />
 
       {loading && <Loader />}
       <Alert />

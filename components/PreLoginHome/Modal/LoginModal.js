@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../store/Actions/userActions";
+import { userActions } from "../../../store/Slices/user/userSlice";
 import Loader from "../../Loader/Loader";
+import { alertService } from "../../../utils/Alert/alert.service";
 
 const LoginModal = ({ setShowModal }) => {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
   const { loading } = useSelector((state) => state.user);
@@ -15,9 +18,15 @@ const LoginModal = ({ setShowModal }) => {
   };
 
   const btnText = loading ? "Please wait.." : "Sign in";
-  // useEffect(() => {
-
-  // }, [])
+  useEffect(() => {
+    if (error) {
+      alertService.error(error, {
+        autoClose: true,
+        keepAfterRouteChange: false,
+      });
+      dispatch(userActions.clearErrors());
+    }
+  }, [error]);
 
   return (
     <>
