@@ -14,12 +14,11 @@ const Navbar = () => {
     <>
       <nav>
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <a
-            className="hidden font-bold text-2xl lg:text-4xl md:block"
-            href="/"
-          >
-            Project Share+
-          </a>
+          <Link href="/">
+            <a className="hidden font-bold text-2xl lg:text-4xl md:block">
+              Project Share+
+            </a>
+          </Link>
 
           <div>
             <ul className="inline-flex">
@@ -44,24 +43,28 @@ const Navbar = () => {
                   router.pathname == "/login" ? "font-bold text-red" : ""
                 }
               >
-                <a
-                  className="px-4 hover:text-blue-800 cursor-pointer"
-                  onClick={() => setShowModal(true)}
-                >
-                  Login
-                </a>
+                <Link href="#">
+                  <a
+                    className="px-4 hover:text-blue-800 cursor-pointer"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Login
+                  </a>
+                </Link>
               </li>
               <li
                 className={
                   router.pathname == "/register" ? "font-bold text-red" : ""
                 }
               >
-                <a
-                  className="px-4 hover:text-blue-800 cursor-pointer"
-                  onClick={() => setShowRegisterModal(true)}
-                >
-                  Register
-                </a>
+                <Link href="#">
+                  <a
+                    className="px-4 hover:text-blue-800 cursor-pointer"
+                    onClick={() => setShowRegisterModal(true)}
+                  >
+                    Register
+                  </a>
+                </Link>
               </li>
             </ul>
           </div>

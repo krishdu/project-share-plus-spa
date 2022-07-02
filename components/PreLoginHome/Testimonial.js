@@ -34,8 +34,8 @@ const Testimonial = () => {
             <div className="w-full md:w-1/3 px-2 mb-4">
               <div className="bg-white rounded shadow py-2">
                 <p className="text-gray-800 text-base px-6 mb-5">
-                  I don't regret spending time with this product. One of the
-                  best platform I use!.
+                  I don&apos;t regret spending time with this product. One of
+                  the best platform I use!.
                 </p>
                 <p className="text-gray-500 text-xs md:text-sm px-6">
                   Krishnendu

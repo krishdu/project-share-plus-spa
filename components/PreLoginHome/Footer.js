@@ -72,6 +72,7 @@ const Footer = () => {
                     href="https://www.linkedin.com/in/krishnendu-patra/"
                     className="hover:underline text-gray-600 hover:text-orange-500"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Linkedin
                   </a>
