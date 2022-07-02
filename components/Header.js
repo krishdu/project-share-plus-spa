@@ -7,7 +7,7 @@ import { AiFillBell, AiFillMessage } from "react-icons/ai";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import userIcon from "../public/assets/user_icon.png";
-import brandIcon from "../public/brand_logo_v1.png";
+import brandIcon from "../public/brand_logo_v1.PNG";
 import { logoutUser } from "../store/Actions/userActions";
 import { userActions } from "../store/Slices/user/userSlice";
 import { alertService } from "../utils/Alert/alert.service";
