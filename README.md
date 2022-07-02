@@ -5,14 +5,14 @@
 This is a Next.js and Spring Boot project
 
 
-| [MoSCoW (👆)](https://project-share-plus-spa.vercel.app/){:target="_blank" rel="noopener"} |
+| [MoSCoW (👆)](https://project-share-plus-spa.vercel.app/) |
 | ----- |
 
 ```
 INITIAL RELEASE
 ```
 
-| [Live Application (👆)](https://project-share-plus-spa.vercel.app/){:target="_blank" rel="noopener"} |
+| [Live Application (👆)](https://project-share-plus-spa.vercel.app/)|
 | ----- |
 
 + ### Learnings:
