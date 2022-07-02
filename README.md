@@ -5,7 +5,7 @@
 This is a Next.js and Spring Boot project
 
 
-| [MoSCoW (👆)](https://project-share-plus-spa.vercel.app/) |
+| [MoSCoW (👆)](https://github.com/krishdu/project-share-plus-spa/projects/1/) |
 | ----- |
 
 ```
