@@ -4,6 +4,17 @@
 
 This is a Next.js and Spring Boot project
 
+
+| [MoSCoW (👆)](https://project-share-plus-spa.vercel.app/){:target="_blank" rel="noopener"} |
+| ----- |
+
+```
+INITIAL RELEASE
+```
+
+| [Live Application (👆)](https://project-share-plus-spa.vercel.app/){:target="_blank" rel="noopener"} |
+| ----- |
+
 + ### Learnings:
  + Automatic dependency injection using `@Autowired`
  + Different attributes present on Spring Boot

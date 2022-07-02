@@ -7,6 +7,7 @@ import { AiFillBell, AiFillMessage } from "react-icons/ai";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import userIcon from "../public/assets/user_icon.png";
+import brandIcon from "../public/brand_logo_v1.png";
 import { logoutUser } from "../store/Actions/userActions";
 import { userActions } from "../store/Slices/user/userSlice";
 import { alertService } from "../utils/Alert/alert.service";
@@ -42,6 +43,10 @@ const Header = () => {
     router.push("/user/me");
   };
 
+  const goToHomeHandler = () => {
+    router.push("/");
+  };
+
   return (
     <>
       {!loading && (
@@ -49,7 +54,7 @@ const Header = () => {
           {/* left */}
           <div className="flex min-w-fit">
             <Image
-              src="/brand_logo_v1.png"
+              src={brandIcon}
               alt="brand logo"
               height="55"
               width="200"
@@ -71,7 +76,10 @@ const Header = () => {
           {/* Center */}
           <div className="flex flex-grow justify-center mx-2">
             <div className="flex items-center">
-              <div className="flex items-center h-14 px-4 md:px-10 rounded-md md:hover:bg-gray-100 cursor-pointer">
+              <div
+                className="flex items-center h-14 px-4 md:px-10 rounded-md md:hover:bg-gray-100 cursor-pointer"
+                onClick={goToHomeHandler}
+              >
                 <HiOutlineHome className="mx-auto" size={25} title="Home" />
               </div>
               <div
