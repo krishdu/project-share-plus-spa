@@ -5,7 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import TabHeader from "../../components/TabHeader";
 import userIcon from "../../public/assets/user_icon.png";
 import { loadUser } from "../../store/Actions/userActions";
-//import { userActions } from "../../store/Slices/user/userSlice";
+import PreLoginHome from "../../components/PreLoginHome/PreLoginHome";
 
 const Me = () => {
   const dispatch = useDispatch();
@@ -122,11 +122,7 @@ const Me = () => {
           </Fragment>
         )}
 
-        {!loading && !isAutheticated && (
-          <center>
-            <b>Not Authorize to access this resource</b>
-          </center>
-        )}
+        {!loading && !isAutheticated && <PreLoginHome />}
       </Fragment>
     </>
   );
